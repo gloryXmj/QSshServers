@@ -35,10 +35,10 @@
 #include <iomanip>
 
 #pragma comment(lib, "ws2_32.lib")
-#pragma comment(lib, "libeay32.lib")  
-#pragma comment(lib, "libssh2.lib")  
+#pragma comment(lib, "libeay32.lib")
+#pragma comment(lib, "libssh2.lib")
 
-namespace kagula {
+namespace qssh {
 	namespace network
 	{
 		//初始化进程的时候调用
@@ -60,7 +60,6 @@ namespace kagula {
 		void SFTP_Exit()
 		{
 			libssh2_exit();
-
 			WSACleanup();
 		}
 
@@ -116,7 +115,6 @@ namespace kagula {
 				libssh2_session_free(session); closesocket(sock);
 				return bR;
 			}
-
 			//检查主机指纹
 			std::ostringstream ostr;
 			fingerprint = libssh2_hostkey_hash(session, LIBSSH2_HOSTKEY_HASH_SHA1);

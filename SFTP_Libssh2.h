@@ -21,7 +21,7 @@
 《使用libssh2库实现支持密码参数的ssh2客户端》
 http://blog.chinaunix.net/uid-24382173-id-229823.html
 */
-namespace kagula {
+namespace qssh {
 	namespace network {
 		int SFTP_Init();
 		void SFTP_Exit();
@@ -37,42 +37,42 @@ namespace kagula {
 		{
 		public:
             static SFTP_Libssh2* Inst();
-			/*
-			入口参数使用说明
-			ip:	  就填一个IP地址就好了，例如“127.0.0.1”。
-			port: 端口，SFTP服务器默认端口为22。
-			username:
-			password:
-			sftppath: 远程路径“/”开头 ，例如“/a.jpg”
-			localpath: 本地路径，例如“d:\\temp\\test.jpg”
-			strLastError: 错误信息
-			出口参数
-			返回不等于零，代表失败！
-			*/
+            /***
+             * 入口参数使用说明
+             * ip:	  就填一个IP地址就好了，例如“127.0.0.1”。
+             * port: 端口，SFTP服务器默认端口为22。
+             * username:
+             * password:
+             * sftppath: 远程路径“/”开头 ，例如“/a.jpg”
+             * localpath: 本地路径，例如“d:\\temp\\test.jpg”
+             * strLastError: 错误信息
+             * 出口参数
+             * 返回不等于零，代表失败！
+             ***/
 			int upload(std::string ip, unsigned short port, std::string username,
 				std::string password, std::string localpath, std::string remotepath);
 			int download(std::string ip, unsigned short port, std::string username,
 				std::string password, std::string sftppath, std::string localpath);
 
-			//测试SFTP服务器是否可以链接
+            ///测试SFTP服务器是否可以链接
 			bool IsAbilityConn(std::string ip, unsigned short port, std::string username,
 				std::string password);
 
-			//设置回掉函数
+            ///设置回掉函数
 			void SetBKCall(SFTP_BKCall *bkCall) { m_bkCall = bkCall; }
 
-			//存放最近的错误信息
+            ///存放最近的错误信息
 			std::string   strLastError;
 
-			//用于停止当前上传或下载线程
+            ///用于停止当前上传或下载线程
 			void stop() { m_isBreak.store(true); }
 		private:
-			SFTP_Libssh2() :m_bkCall(NULL) { m_isBreak.store(false); };//防止直接初始化
-			SFTP_Libssh2(const SFTP_Libssh2&);                 //防止拷贝复制
-			SFTP_Libssh2& operator=(const SFTP_Libssh2&);      //防止分配(运算符函数的调用)
+            SFTP_Libssh2() :m_bkCall(NULL) { m_isBreak.store(false); };///防止直接初始化
+            SFTP_Libssh2(const SFTP_Libssh2&);                 ///防止拷贝复制
+            SFTP_Libssh2& operator=(const SFTP_Libssh2&);      ///防止分配(运算符函数的调用)
 
 			SFTP_BKCall  *m_bkCall;
-			std::atomic_bool m_isBreak; //带读写保护的bool值
+            std::atomic_bool m_isBreak; ///带读写保护的bool值
 		};
 	}
 }

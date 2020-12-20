@@ -10,6 +10,8 @@ CONFIG += c++11
 
 CONFIG += console
 
+DEFINES += _WINSOCK_DEPRECATED_NO_WARNINGS
+
 INCLUDEPATH += $$PWD/ \
                $$PWD/ssh/ \
                $$PWD/ssh/include/
@@ -18,11 +20,13 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     SFTP_Libssh2.cpp \
+    shell_libssh2.cpp \
     ssh_connect.cpp
 
 HEADERS += \
     mainwindow.h \
-    SFTP_Libssh2.h
+    SFTP_Libssh2.h \
+    shell_libssh2.h
 
 FORMS += \
     mainwindow.ui

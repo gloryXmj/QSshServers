@@ -1,6 +1,5 @@
 ﻿// ssh_connect.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
-#define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include "pch.h"
 #include <iostream>
 #include <libssh2.h>
@@ -240,7 +239,6 @@ int main2(int argc, char *argv[])
 
 #if 0
 	libssh2_trace(session, ~0);
-
 #endif
 
 	/* Exec non-blocking on the remove host */
@@ -333,13 +331,11 @@ shutdown:
 
 	libssh2_exit();
 
-
-
 	//下面的代码只要在进程初始化的时候执行
-	kagula::network::SFTP_Init();
+	qssh::network::SFTP_Init();
 
 	//测试SFTP链接
-	kagula::network::SFTP_Libssh2* client = kagula::network::SFTP_Libssh2::Inst();
+	qssh::network::SFTP_Libssh2* client = qssh::network::SFTP_Libssh2::Inst();
 	std::string ip = "192.168.221.133";
 	uint16_t port = 22;
 	std::string usr = "root";
@@ -370,8 +366,7 @@ shutdown:
 	{
 		std::cout << client->strLastError << std::endl;
 	}
-
 	//进程准备结束，释放资源的时候，运行下面的代码
-	kagula::network::SFTP_Exit();
+	qssh::network::SFTP_Exit();
 	return 0;
 }
