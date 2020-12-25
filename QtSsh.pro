@@ -20,12 +20,14 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     SFTP_Libssh2.cpp \
+    qssh.cpp \
     shell_libssh2.cpp \
     ssh_connect.cpp
 
 HEADERS += \
     mainwindow.h \
     SFTP_Libssh2.h \
+    qssh.h \
     shell_libssh2.h
 
 FORMS += \

@@ -1,5 +1,4 @@
 //SFTP_Libssh2.cpp文件清单
-#define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include "pch.h"
 #include "SFTP_Libssh2.h"
 
